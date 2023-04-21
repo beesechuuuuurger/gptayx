@@ -1,0 +1,93 @@
+{
+    "name": "AlteryxGPT",
+    "tool_category": "Laboratory",
+    "package_icon_path": "configuration\\default_package_icon.png",
+    "author": "Gavin Volpe",
+    "company": "Evolve Cloud Services",
+    "copyright": "",
+    "description": "Open AI in Alteryx",
+    "ayx_cli_version": "1.0.4",
+    "backend_language": "python",
+    "backend_language_settings": {
+        "python_version": "3.8",
+        "requirements_local_path": "tool_backends\\requirements-local.txt",
+        "requirements_thirdparty_path": "tool_backends\\requirements-thirdparty.txt"
+    },
+    "tools": {
+        "AlteryxGPT": {
+            "backend": {
+                "tool_module": "ayx_plugins",
+                "tool_class_name": "AlteryxGPT"
+            },
+            "ui": {
+                "InputConnections": [
+                    {
+                        "Connection": {
+                            "Name": "Input1",
+                            "AllowMultiple": false,
+                            "Optional": false,
+                            "Type": "Connection",
+                            "Label": "Input column to classify",
+                            "ToolTip": "Select the column containing the values to classify."
+                        }
+                    },
+                    {
+                        "Connection": {
+                            "Name": "Input2",
+                            "AllowMultiple": false,
+                            "Optional": true,
+                            "Type": "Connection",
+                            "Label": "Category column",
+                            "ToolTip": "Select the column containing the categories to classify the input values as."
+                        }
+                    }
+                ],
+                "OutputConnections": [
+                    {
+                        "Connection": {
+                            "Name": "Output",
+                            "AllowMultiple": false,
+                            "Optional": false,
+                            "Type": "Connection",
+                            "Label": "Output column",
+                            "ToolTip": "The column containing the classification results."
+                        }
+                    }
+                ],
+                "Html": "gpt.html",
+                "Icon": "ayx_gpt.png",
+                "Help": "",
+                "SDKVersion": "10.1"
+            },
+            "configuration": {
+                "long_name": "Alteryx GPT",
+                "description": "Open AI in Alteryx",
+                "version": "1",
+                "search_tags": [],
+                "help_url": "https://help.alteryx.com/developer-help",
+                "icon_path": "configuration\\AlteryxGPT_1\\icon.png",
+                "input_anchors": {
+                    "Input1": {
+                        "label": "Input 1",
+                        "allow_multiple": false,
+                        "optional": false
+                    },
+                    "Input2": {
+                        "label": "Input 2",
+                        "allow_multiple": false,
+                        "optional": true
+                    }
+                },
+                "output_anchors": {
+                    "Output": {
+                        "label": "Output",
+                        "allow_multiple": false,
+                        "optional": false
+                    }
+                },
+                "dcm_namespace": ""
+            }
+        }
+    },
+    "tool_version": "1.0"
+}
