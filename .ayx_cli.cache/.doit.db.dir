@@ -15,6 +15,6 @@
 'generate_tests', (7168, 161)
 'generate_artifact', (7680, 56)
 'create_yxi', (8192, 56)
-'create_yxi:create_yxi', (8704, 252)
+'create_yxi:create_yxi', (8704, 253)
 'install_yxi', (9728, 56)
-'generate_artifact:build_artifacts', (10752, 103)
+'generate_artifact:build_artifacts', (11776, 103)

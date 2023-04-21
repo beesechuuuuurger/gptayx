@@ -22,22 +22,24 @@ from ayx_python_sdk.providers.amp_provider.amp_provider_v2 import AMPProviderV2
 import AlteryxPythonSDK as Sdk
 import pandas as pd
 import re
-from langchain import LanguageChain, OpenAIAPIKeyError
+import openai
+from langchain import LLMChain, OpenAIAPIKeyError
 from AlteryxPythonSDK import AyxEmitter
 
 
 class GPTPlugin(PluginV2):
     def __init_plugin__(self):
+        # Get the user-specified configuration
+        config_str = self.alteryx_engine.get_init_var(
+            self.n_tool_id, 'Configuration')
+        config = json.loads(config_str)
+
         # Initialize instance variables
-        self.langchain = None
-        self.api_key = None
-
-        self.input_column = None
-        self.optional_input = None
-        self.classification_attributes = []
-
-        self.prompt_format = None
-        self.output_format = None
+        self.api_key = config.get('apiKey', '')
+        self.prompt_format = config.get('prompt', '')
+        self.output_format = config.get('outputFormat', '')
+        self.classify_or_attributes = config.get(
+            'classifyOrAttributes', 'Classify')  # Add this line
 
 
     def initialize_output_anchor(self):
@@ -95,10 +97,13 @@ class GPTPlugin(PluginV2):
             },
         }
 
+    def set_api_key(self, api_key: str):
+        openai.api_key = api_key
+
     def submit_api_key(self, api_key):
         # Validate and set the API key for the LanguageChain object
         try:
-            self.langchain = LanguageChain(api_key=api_key)
+            self.langchain = LLMChain(api_key=api_key)
         except OpenAIAPIKeyError:
             # Handle invalid API key
             pass
@@ -172,6 +177,25 @@ class GPTPlugin(PluginV2):
         # Output the result DataFrame to the specified columns
         self.output_data(result_df)
 
+    def create_template(self, prompt: str, input_values: list, categories: list = None, classify_or_attributes: str = "Classify"):
+        self.input_values = input_values
+        self.prompt_format = prompt
+        self.categories = categories
+        self.classify_or_attributes = classify_or_attributes
+
+        if self.classify_or_attributes == "Classify":
+            if categories:
+                full_prompt = self.build_prompt(categories)
+            else:
+                full_prompt = self.build_prompt()
+        elif self.classify_or_attributes == "Attributes":
+            full_prompt = self.build_attributes_prompt()
+        else:
+            raise ValueError("Invalid value for classify_or_attributes. It must be 'Classify' or 'Attributes'.")
+
+        results = self.handle_token_count(full_prompt)
+        return results
+    
     def build_prompt(self):
         # Create the prompt using the user input
         prompt = f"Classify the following values based on the categories provided:\n\n"
@@ -186,6 +210,15 @@ class GPTPlugin(PluginV2):
     def build_optional_prompt(self, input_value, optional_input_value):
         # Create the prompt using the input value, user-defined prompt format, and the predetermined category
         prompt = f"{self.prompt_format} {input_value} {optional_input_value}"
+        return prompt
+
+    def build_attributes_prompt(self):
+        prompt = "List attributes of the following values:\n\n"
+
+        for value in self.input_values:
+            prompt += f"- {value}\n"
+
+        prompt += f"\nFormat the response as: 'input_value: {self.output_format}'."
         return prompt
 
     def handle_token_count(self, prompt):
@@ -282,6 +315,20 @@ class GPTPlugin(PluginV2):
 
         # Signal the end of the data stream
         self.output_anchor.close()
+
+    def pi_push_all_records(self, _record_info_out: object) -> bool:
+        # Process records
+        if self.input_records:
+            results = self.create_template(
+                self.prompt_format,
+                self.input_records,
+                self.optional_input,
+                self.classify_or_attributes  # Add this parameter
+            )
+
+            # Output the results
+            for result in results:
+                self.output_record(result)
 
     def on_complete(self):
         # Check if there is any data to output

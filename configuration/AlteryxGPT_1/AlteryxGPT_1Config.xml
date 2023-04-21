@@ -8,7 +8,7 @@
 			<ToolVersion Value="1"/>
 		</CustomParameters>
 	</SdkSettings>
-	<GuiSettings Html="C:\ProgramData\Alteryx\Tools\Alteryx_Gpt\ui\AlteryxGPT\harness\index.html" Icon="icon.png" SDKVersion="10.1" Help="https://help.alteryx.com/developer-help">
+	<GuiSettings Html="index.html" Icon="icon.png" SDKVersion="10.1" Help="https://help.alteryx.com/developer-help">
 		<InputConnections>
 			<Connection AllowMultiple="False" Label="I" Name="Input1" Optional="False" Type="Connection"/>
 			<Connection AllowMultiple="False" Label="C" Name="Input2" Optional="True" Type="Connection"/>
