@@ -23,7 +23,7 @@
                 "InputConnections": [
                     {
                         "Connection": {
-                            "Name": "Input1",
+                            "Name": "Input",
                             "AllowMultiple": false,
                             "Optional": false,
                             "Type": "Connection",
@@ -33,7 +33,7 @@
                     },
                     {
                         "Connection": {
-                            "Name": "Input2",
+                            "Name": "Class",
                             "AllowMultiple": false,
                             "Optional": true,
                             "Type": "Connection",
@@ -49,13 +49,13 @@
                             "AllowMultiple": false,
                             "Optional": false,
                             "Type": "Connection",
-                            "Label": "Output column",
+                            "Label": "Output",
                             "ToolTip": "The column containing the classification results."
                         }
                     }
                 ],
-                "Html": "gpt.html",
-                "Icon": "ayx_gpt.png",
+                "Html": "C:/ProgramData/Alteryx/Tools/Alteryx_Gpt/Alteryx_Gpt.html",
+                "Icon": "C:/ProgramData/Alteryx/Tools/Alteryx_Gpt/configuration/AlteryxGPT_1/icon.png",
                 "Help": "",
                 "SDKVersion": "10.1"
             },
@@ -68,19 +68,19 @@
                 "icon_path": "configuration\\AlteryxGPT_1\\icon.png",
                 "input_anchors": {
                     "Input1": {
-                        "label": "Input 1",
+                        "label": "I",
                         "allow_multiple": false,
                         "optional": false
                     },
                     "Input2": {
-                        "label": "Input 2",
+                        "label": "C",
                         "allow_multiple": false,
                         "optional": true
                     }
                 },
                 "output_anchors": {
                     "Output": {
-                        "label": "Output",
+                        "label": "O",
                         "allow_multiple": false,
                         "optional": false
                     }

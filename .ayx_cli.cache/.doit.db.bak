@@ -13,3 +13,8 @@
 'generate_config_files:generate_tool_config_xml', (6144, 161)
 'generate_config_files:generate_manifest_jsons', (6656, 161)
 'generate_tests', (7168, 161)
+'generate_artifact', (7680, 56)
+'create_yxi', (8192, 56)
+'create_yxi:create_yxi', (8704, 252)
+'install_yxi', (9728, 56)
+'generate_artifact:build_artifacts', (10752, 103)

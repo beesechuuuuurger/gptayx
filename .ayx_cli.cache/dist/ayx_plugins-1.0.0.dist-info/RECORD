@@ -1,0 +1,11 @@
+ayx_plugins-1.0.0.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4
+ayx_plugins-1.0.0.dist-info/METADATA,sha256=-VpLaRJcq3Y6xPjE9R2OyT94kufAegpza63R89hGYCM,233
+ayx_plugins-1.0.0.dist-info/RECORD,,
+ayx_plugins-1.0.0.dist-info/REQUESTED,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+ayx_plugins-1.0.0.dist-info/WHEEL,sha256=2wepM1nk4DS4eFpYrW1TTqPcoGNfHhhO_i5m4cOimbo,92
+ayx_plugins-1.0.0.dist-info/direct_url.json,sha256=XC9LQr1Oimb3ikB2TZXcFHkx0fGMkHQo9FJQ5QwfDdQ,83
+ayx_plugins-1.0.0.dist-info/top_level.txt,sha256=W5LlMln6bDR28RBXDPP0UEmxW5GMp-JjAgdhv6cJ0kA,12
+ayx_plugins/__init__.py,sha256=w-tQLZcrNG-d9wxy6F6FoKBS-kYHGkFf4JbmqF7g5p4,698
+ayx_plugins/__pycache__/__init__.cpython-38.pyc,,
+ayx_plugins/__pycache__/alteryx_g_p_t.cpython-38.pyc,,
+ayx_plugins/alteryx_g_p_t.py,sha256=fRExC1x1uc1UUKDMaSWRVvKm6J1sdAexLWU8iAAv6D4,12062
