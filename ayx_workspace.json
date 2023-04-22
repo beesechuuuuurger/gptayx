@@ -59,27 +59,39 @@
                 "Help": "https://help.alteryx.com/developer-help",
                 "SDKVersion": "10.1",
                 "Properties": {
-                    "ClassifyOrAttributes": {
-                        "Label": "Classify or Attributes?",
-                        "Type": "Select",
-                        "Tooltip": "Choose whether to classify the input values or list their attributes.",
-                        "Values": [
-                            "Classify",
-                            "Attributes"
-                        ],
-                        "Default": "Classify"
+                    "Classification": {
+                        "Label": "Classification",
+                        "Type": "Group",
+                        "Properties": {
+                            "ClassifyOrAttributes": {
+                                "Label": "Classify or Attributes?",
+                                "Type": "Select",
+                                "Tooltip": "Choose whether to classify the input values or list their attributes.",
+                                "Values": [
+                                    "Classify",
+                                    "Attributes"
+                                ],
+                                "Default": "Classify"
+                            },
+                            "PromptFormat": {
+                                "Label": "Prompt Format",
+                                "Type": "String",
+                                "Tooltip": "Enter a template for the prompt to be used for classification or listing attributes.",
+                                "Default": ""
+                            }
+                        }
                     },
-                    "PromptFormat": {
-                        "Label": "Prompt Format",
-                        "Type": "String",
-                        "Tooltip": "Enter a template for the prompt to be used for classification or listing attributes.",
-                        "Default": ""
-                    },
-                    "OutputFormat": {
-                        "Label": "Output Format",
-                        "Type": "String",
-                        "Tooltip": "Enter a template for the output.",
-                        "Default": ""
+                    "Output": {
+                        "Label": "Output",
+                        "Type": "Group",
+                        "Properties": {
+                            "OutputFormat": {
+                                "Label": "Output Format",
+                                "Type": "String",
+                                "Tooltip": "Enter a template for the output.",
+                                "Default": ""
+                            }
+                        }
                     },
                     "APIKey": {
                         "Label": "API Key",

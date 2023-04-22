@@ -12,11 +12,21 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
-      "*": ["types/*"],
+      "*": [
+        "types/*"
+      ],
     },
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "esModuleInterop": true
   },
-  "include": ["custom.d.ts"],
-  "exclude": ["node_modules", "src/**/*.test.*"]
+  "include": [
+    "custom.d.ts",
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/**/*.test.*"
+  ]
 }

@@ -22,7 +22,8 @@ from ayx_python_sdk.providers.amp_provider.amp_provider_v2 import AMPProviderV2
 import AlteryxPythonSDK as Sdk
 import pandas as pd
 import re
-import openai
+import requests
+import langchain
 from langchain import LLMChain, OpenAIAPIKeyError
 from AlteryxPythonSDK import AyxEmitter
 
@@ -30,16 +31,15 @@ from AlteryxPythonSDK import AyxEmitter
 class GPTPlugin(PluginV2):
     def __init_plugin__(self):
         # Get the user-specified configuration
-        config_str = self.alteryx_engine.get_init_var(
-            self.n_tool_id, 'Configuration')
+        config_str = self.alteryx_engine.get_init_var(self.n_tool_id, 'Configuration')
         config = json.loads(config_str)
 
         # Initialize instance variables
         self.api_key = config.get('apiKey', '')
         self.prompt_format = config.get('prompt', '')
         self.output_format = config.get('outputFormat', '')
-        self.classify_or_attributes = config.get(
-            'classifyOrAttributes', 'Classify')  # Add this line
+        self.classify_or_attributes = config.get('classifyOrAttributes', 'Classify')  # Add this line
+        self.alteryx_engine.register_call_back("sendDataToPython", self.on_receive_data_from_ui)
 
 
     def initialize_output_anchor(self):
@@ -97,8 +97,6 @@ class GPTPlugin(PluginV2):
             },
         }
 
-    def set_api_key(self, api_key: str):
-        openai.api_key = api_key
 
     def submit_api_key(self, api_key):
         # Validate and set the API key for the LanguageChain object
@@ -124,6 +122,36 @@ class GPTPlugin(PluginV2):
         elif input_num == 1 and self.optional_input:
             # Process and store the optional predetermined categories
             self.optional_input_data.append(optional_input_value)
+
+    def on_receive_data_from_ui(self, payload):
+        # Extract the user inputs from the payload
+        apiKey = payload['apiKey']
+        prompt = payload['prompt']
+        outputFormat = payload['outputFormat']
+        classificationContext = payload['classificationContext']
+        columnSelection = payload['columnSelection']
+        outputColumns = payload['outputColumns']
+        classificationType = payload['classificationType']
+
+        # Initialize the Langchain client
+        client = langchain.Client(api_key=apiKey)
+
+        # Prepare the prompt for the API call
+        # Here, you can customize the prompt based on user inputs and preferences
+        full_prompt = f"{classificationContext}\n{prompt}"
+
+        # Make the API call to ChatGPT using Langchain
+        response = client.generate_text(
+            prompt=full_prompt, model="gpt-3", max_tokens=50)
+
+        # Process the API response
+        # Here, you can process the response based on user preferences and the outputFormat
+        generated_text = response["generated_text"]
+
+        # Send the processed output to the output anchor(s)
+        # Here, you should send the processed output to the designated output anchor(s)
+        # based on the outputColumns value
+        pass
 
     def process_data(self, input_value: dict) -> dict:
         # Initialize an empty DataFrame to store the results
